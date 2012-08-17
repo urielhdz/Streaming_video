@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title>Video</title>
+	<style>
+		video{display: none;}
+	</style>
+</head>
+<body>
+	<video autoplay></video>
+	<canvas id='miCanvas' width='800' height='600'></canvas>
+	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+	<script>
+		var bandera=0;
+		var websocket = io.connect("http://localhost:8080");
+		window.URL = window.URL || window.webkitURL;
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+		navigator.getUserMedia({audio: true, video:true},function(vid){
+			bandera = 1;
+			document.querySelector('video').src = window.URL.createObjectURL(vid);
+		});
+		window.requestAnimFrame = (function(callback){
+			return window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			function(callback){
+				window.setTimeout(callback, 1000 / 100);
+			};
+		})();
+		function dFrame(ctx,video,canvas)
+		{
+			ctx.drawImage(video,0,0);
+			var dataURL = canvas.toDataURL('image/jpeg',0.2);
+			if(bandera!=0) websocket.emit('newFrame',dataURL);
+			requestAnimFrame(function(){
+				dFrame(ctx,video,canvas);
+			});
+		}
+		window.addEventListener('load',init);
+		function init()
+		{
+			var canvas = document.querySelector('#miCanvas');
+			var video = document.querySelector('video');
+			var ctx = canvas.getContext('2d');
+			dFrame(ctx,video,canvas);
+		}
+	</script>
+</body>
+</html>
