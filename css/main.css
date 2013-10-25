@@ -1,0 +1,29 @@
+video{
+	display:none;
+}
+
+#recCanvas{
+	display:none;
+}
+
+#videoscreen{
+	position:relative;
+}
+
+#mycam{
+	position:absolute;
+	bottom:0;
+	right:0;
+}
+
+#remoteImage{
+	min-width: 800px;
+	min-height: 600px;
+}
+
+#myvision{
+	min-width: 100px;
+	min-height: 100px;	
+	max-width: 200px;
+	max-height: 200px;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Activa-T Video Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/main.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<div class="container .text-center">
+<h1>Activa-T Video Demo</h1>
+<div class="row">
+<div class="col-md-12">
+<div id="videoscreen">
+<img id="remoteImage" >
+<div id="mycam">
+<img id="myvision">
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<form class="form-inline" role="form">
+<button id="start" type="button" class="btn btn-sucess btn-lg">
+  <span class="glyphicon glyphicon-play"></span> Start streaming
+</button>
+<button id="stop" type="button" class="btn btn-sucess btn-lg">
+  <span class="glyphicon glyphicon-stop"></span> Stop streaming
+</button>
+<div class="checkbox">
+    <label>
+      <input type="checkbox" checked id="camselector"> View own camera
+    </label>
+  </div>
+</form>
+</div>
+
+</div>
+</div>
+
+
+<video autoplay></video>
+<canvas id='recCanvas' width="800" height="600"></canvas>
+
+
+
+
+<script src="http://192.168.110.134:8080/socket.io/socket.io.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="video.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
