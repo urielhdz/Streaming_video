@@ -22,6 +22,21 @@
 
 <div class="row">
 <div class="col-md-12">
+<form class="form-inline" role="form" id="configForm">
+<label class="radio-inline">
+  <input type="radio" id="qvga" value="320" name="size"> 320 x 420
+</label>
+<label class="radio-inline">
+  <input type="radio" id="vga" value="640" name="size"> 640 x 480
+</label>
+<label class="radio-inline">
+  <input type="radio" id="hd" value="1280" name="size"> 1280 x 720
+</label>
+</form>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
 <form class="form-inline" role="form">
 <button id="start" type="button" class="btn btn-sucess btn-lg">
   <span class="glyphicon glyphicon-play"></span> Start streaming
@@ -41,19 +56,19 @@
 </div>
 
 
-<video autoplay></video>
-<canvas id='recCanvas' width="800" height="600"></canvas>
+<video></video>
+<canvas id='recCanvas'></canvas>
 
 
 
 
 <script src="http://192.168.110.134:8080/socket.io/socket.io.js"></script>
 <script src="js/jquery.min.js"></script>
-<script src="video.js"></script>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
-
+<script src="video.js"></script>
 </body>
 </html>

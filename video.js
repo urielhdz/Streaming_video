@@ -26,15 +26,79 @@ function createUUID() {
 }
 
 function stream(){
-		streamId = createUUID();
+		var streamId = createUUID();
 		var bandera=0;
 		var websocket = io.connect("http://192.168.110.134:8080");
+		var canvas = document.querySelector('#recCanvas');
+		var video = document.querySelector('video');
+		var ctx = canvas.getContext('2d');
+
+
+
 		window.URL = window.URL || window.webkitURL;
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-		navigator.getUserMedia({audio: false, video:true},function(vid){
-			bandera = 1;
-			document.querySelector('video').src = window.URL.createObjectURL(vid);
+		
+		var ss = $('input[name=size]:checked', '#configForm').val();
+		var constraints;
+		var qVGA_constraint = {
+			video:{
+				mandatory: {
+					maxWidth: 320,
+					maxHeight: 240
+				}
+			}
+		};
+
+		var vga_constraint = {
+			video:{
+				mandatory: {
+					maxWidth: 640,
+					maxHeight: 480
+				}
+			}
+		};
+
+		var hd_720_constraint = {
+			video:{
+				mandatory: {
+					maxWidth: 1280,
+					maxHeight: 720
+				}
+			}
+		};
+		
+
+
+		if(ss){
+			if(ss=="320"){
+				constraints = qVGA_constraint;
+			}else if(ss=="640"){
+				constraints = vga_constraint;
+			}else{
+				constraints = hd_720_constraint;	
+			}
+		}else{
+			constraints = qVGA_constraint;
+		}
+		//console.log(constraints);
+
+
+		navigator.getUserMedia(constraints,function(vid){
+			
+			//document.querySelector('video').src = window.URL.createObjectURL(vid);
+			video = document.querySelector('video');
+			if (video.mozSrcObject !== undefined) {
+        		video.mozSrcObject = vid;
+        		
+    		} else {
+        		video.src = (window.URL && window.URL.createObjectURL(vid)) || vid;
+    		};
+    		video.play();
+    		bandera = 1;
+
+		}, function(error){
+			alert("get user media not supported in this browser. Error: "+error);
 		});
 		window.requestAnimFrame = (function(callback){
 			return window.requestAnimationFrame ||
@@ -48,22 +112,37 @@ function stream(){
 		})();
 		function dFrame(ctx,video,canvas)
 		{
-			console.log("dFrame");
-			ctx.drawImage(video,0,0);
-			var dataURL = canvas.toDataURL('image/jpeg',0.2);
-			console.log(dataURL);
-			document.querySelector('#myvision').src = dataURL;
-			obj = {"dataURL":dataURL, "streamId":streamId};
-			if(bandera!=0) websocket.emit('newFrame',obj);
-			requestAnimFrame(function(){
-				setTimeout(function(){dFrame(ctx,video,canvas);},1000/fps)
-			});
+			if(bandera==1){
+				ctx.drawImage(video,0,0);
+				var dataURL = canvas.toDataURL('image/jpeg',0.2);
+				document.querySelector('#myvision').src = dataURL;
+				obj = {"dataURL":dataURL, "streamId":streamId};
+			 	websocket.emit('newFrame',obj);
+				requestAnimFrame(function(){
+					setTimeout(function(){dFrame(ctx,video,canvas);},1000/fps);
+				});
+			}
+
+			if(bandera==0){
+				setTimeout(function(){dFrame(ctx,video,canvas);},10);
+			}
 		}
-		
-		var canvas = document.querySelector('#recCanvas');
-		var video = document.querySelector('video');
-		var ctx = canvas.getContext('2d');
+
+		video.addEventListener('loadeddata', function() {
+			console.log('Video dimensions: ' + video.videoWidth + ' x ' + video.videoHeight);
+		}, false);
+
+		video.addEventListener('playing', function() {
+			console.log('Video dimensions: ' + video.videoWidth + ' x ' + video.videoHeight);
+			$("#recCanvas").attr("width",video.videoWidth+"px");
+			$(video).attr("width",video.videoWidth+"px");
+			$("#recCanvas").attr("height",video.videoHeight+"px");
+			$(video).attr("height",video.videoHeight+"px");
+			dFrame(ctx,video,canvas);
+		}, false);
+
 		dFrame(ctx,video,canvas);
+
 }
 
 var showingCam=1;
