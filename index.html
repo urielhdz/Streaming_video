@@ -8,20 +8,15 @@
 </head>
 <body>
 <div class="container .text-center">
-<h1>Activa-T Video Demo</h1>
+
+<div class="col-md-7">
 <div class="row">
-<div class="col-md-12">
+<h1>Activa-T Video Demo</h1>
 <div id="videoscreen">
 <img id="remoteImage" >
-<div id="mycam">
-<img id="myvision">
 </div>
 </div>
-</div>
-</div>
-
 <div class="row">
-<div class="col-md-12">
 <form class="form-inline" role="form" id="configForm">
 <label class="radio-inline">
   <input type="radio" id="qvga" value="320" name="size"> 320 x 420
@@ -34,9 +29,7 @@
 </label>
 </form>
 </div>
-</div>
 <div class="row">
-<div class="col-md-12">
 <form class="form-inline" role="form">
 <button id="start" type="button" class="btn btn-sucess btn-lg">
   <span class="glyphicon glyphicon-play"></span> Start streaming
@@ -51,24 +44,78 @@
   </div>
 </form>
 </div>
+</div>
+<div class="col-md-5" id="side">
+<div class="row">
+<div id="mycam">
+<img id="myvision">
+</div>
+</div>
+<!--
+<div class="col-md-2">
+USUARIO 1
+<p>hr</p>
+<p>br</p>
+<p>posicion</p>
+</div>
+<div class="col-md-2">
+USUARIO 2
+<p>hr</p>
+<p>br</p>
+<p>posicion</p>
+</div>
+<div class="col-md-2">
+USUARIO 3
+<p>hr</p>
+<p>br</p>
+<p>pos</p>
+</div>
+<div class="col-md-2">
+USUARIO 4
+<p>hr</p>
+<p>br</p>
+<p>pos</p>
+</div>
+<div class="col-md-2">
+USUARIO 5
+<p>hr</p>
+<p>br</p>
+<p>pos</p>
+</div>
+<div class="col-md-2">
+USUARIO 6
+<p>hr</p>
+<p>br</p>
+<p>pos</p>
+</div>
+<div class="col-md-2">
+USUARIO 7
+<p>hr</p>
+<p>br</p>
+<p>pos</p>
+</div>
+</div>
+-->
+
+
 
 </div>
 </div>
-
 
 <video></video>
 <canvas id='recCanvas'></canvas>
 
 
 
-
-<script src="http://192.168.110.134:8080/socket.io/socket.io.js"></script>
+<script src="http://192.168.110.207:8080/socket.io/socket.io.js"></script>
 <script src="js/jquery.min.js"></script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
-<script src="video.js"></script>
+<script src="js/video.js"></script>
+<script src="js/smoothie.js"></script>
+<script src="js/data.js"></script>
 </body>
 </html>

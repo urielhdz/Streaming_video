@@ -3,6 +3,7 @@ video{
 }
 
 #recCanvas{
+	background-color: green;
 	display:none;
 }
 
@@ -11,19 +12,27 @@ video{
 }
 
 #mycam{
-	position:absolute;
-	bottom:0;
-	right:0;
+	width: 150px;
+	height: 150px;
+	border: solid 1px grey;
+	margin-top: 70px;
+	margin-left: 100px;
 }
-
+#videoscreen{
+	min-width: 330px;
+	min-height: 250px;
+	border: solid 1px grey;
+}
 #remoteImage{
-	min-width: 800px;
-	min-height: 600px;
+	/*min-width: 320px;*/
+	/*min-height: 240px;*/
 }
 
 #myvision{
-	min-width: 100px;
-	min-height: 100px;	
-	max-width: 200px;
-	max-height: 200px;
+	width: 148px;
+	height: 148px;
+}
+
+.video_plot{
+	width: 150%;
 }
