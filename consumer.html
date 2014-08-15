@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Video</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<style>
+		video{display: none;}
+	</style>
+</head>
+<body>
+	<h1>Hello, world!</h1>
+	<img id='miImg'>
+	<script src="http://192.168.110.134:8080/socket.io/socket.io.js"></script>
+	<script>
+		var websocket = io.connect("http://192.168.110.134:8080");
+		websocket.on('setFrame',proc);
+		function proc(img)
+		{
+			document.querySelector('#miImg').src = img;
+		};
+	</script>
+</body>
+</html>

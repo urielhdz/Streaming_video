@@ -7,9 +7,9 @@
 </head>
 <body>
 	<img id='miImg'>
-	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+	<script src="http://192.168.110.134:8080/socket.io/socket.io.js"></script>
 	<script>
-		var websocket = io.connect("http://localhost:8080");
+		var websocket = io.connect("http://192.168.110.134:8080");
 		websocket.on('setFrame',proc);
 		function proc(img)
 		{

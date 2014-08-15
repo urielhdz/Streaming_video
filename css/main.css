@@ -1,0 +1,38 @@
+video{
+	display:none;
+}
+
+#recCanvas{
+	background-color: green;
+	display:none;
+}
+
+#videoscreen{
+	position:relative;
+}
+
+#mycam{
+	width: 150px;
+	height: 150px;
+	border: solid 1px grey;
+	margin-top: 70px;
+	margin-left: 100px;
+}
+#videoscreen{
+	min-width: 330px;
+	min-height: 250px;
+	border: solid 1px grey;
+}
+#remoteImage{
+	/*min-width: 320px;*/
+	/*min-height: 240px;*/
+}
+
+#myvision{
+	width: 148px;
+	height: 148px;
+}
+
+.video_plot{
+	width: 150%;
+}
